@@ -1,0 +1,3 @@
+      invoke  active_record
+      remove    db/migrate/20240705202642_add_verified_to_users.rb
+      create    db/migrate/20240705202801_add_verified_to_users.rb
