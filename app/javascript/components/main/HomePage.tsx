@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import GlobalStyles from './styles/GlobalStyles'
 import Header from './header'
 import HeroSection from './heroSection'
@@ -13,6 +13,7 @@ import { clearUrl, getToken } from '../utils/pathUtil'
 import { CONFIRM_USER } from '../api/mutations'
 import Banner from '../shared/Banner'
 import PhoneVerification from '../main/PhoneVerification'
+import { CURRENT_USER } from '../api/queries'
 
 // import { Amplify } from 'aws-amplify'
 // import { Authenticator } from '@aws-amplify/ui-react'
@@ -25,6 +26,7 @@ import PhoneVerification from '../main/PhoneVerification'
 export default function HomePage(): JSX.Element {
   const [message, setMessage] = useState<string>()
   const [severity, setSeverity] = useState(null)
+  const { data } = useQuery(CURRENT_USER)
   const [confirmUser] = useMutation(CONFIRM_USER, {
     onCompleted: (data) => {
       if (!!data) {
@@ -58,7 +60,7 @@ export default function HomePage(): JSX.Element {
           withCloseIcon
         />}
       <GlobalStyles />
-      <Header />
+      <Header showAccountMenu={!!data.currentUser} />
       <HeroSection />
       <FeaturesSection />
       <Support />
@@ -67,7 +69,7 @@ export default function HomePage(): JSX.Element {
       <ContactSection />
       <Footer />
 
-      <PhoneVerification />
+      {!!data.currentUser && <PhoneVerification />}
     </>
   )
 }

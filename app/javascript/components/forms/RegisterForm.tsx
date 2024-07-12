@@ -43,13 +43,11 @@ export default function UserForm(): JSX.Element {
   const [register, { loading }] = useMutation(REGISTER_USER, {
     onCompleted: (data) => {
       if (!!data) {
-        console.log("hello world 1")
         setSeverity('success')
         setMessage('Account was created successfully, a confirmation link was sent to your email')
       }
     },
     onError: () => {
-      console.log("hello world 2")
       setSeverity('error')
       setMessage('Sorry, account creation was unsuccessful')
     }
@@ -69,7 +67,6 @@ export default function UserForm(): JSX.Element {
   }
 
   const handleSubmit = (event: User): void => {
-    console.log("hello world")
     register({
       variables: {
         firstName: event.firstName,

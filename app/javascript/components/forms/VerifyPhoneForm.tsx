@@ -18,7 +18,6 @@ export default function VerifyPhoneNumberForm(): JSX.Element {
     handleSubmit,
     handleBlur,
     handleChange,
-    isSubmitting
   } = useFormikContext<any>()
 
   return (
@@ -30,7 +29,7 @@ export default function VerifyPhoneNumberForm(): JSX.Element {
             <TextField
               id='code'
               type='text'
-              value={values.email}
+              value={values.code}
               name='code'
               placeholder='Enter verification code'
               onChange={handleChange}
@@ -48,7 +47,6 @@ export default function VerifyPhoneNumberForm(): JSX.Element {
         <Grid item xs={12}>
           <Button
             disableElevation
-            disabled={isSubmitting}
             fullWidth
             size='large'
             type='submit'

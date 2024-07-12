@@ -29,7 +29,8 @@ export default function Index(): JSX.Element {
           <Route path='/log_in' element={<Login />} />
           {/* protected routes */}
           <Route path='/home/?token=:token' element={<HomePage />} />
-          <Route path='/home' element={!isAuthenticated ? <Login /> : <HomePage />} />
+          <Route path='/home' element={<HomePage />} />
+          <Route path='/' element={<HomePage />} />
           <Route path='/Profile' element={!isAuthenticated ? <Login /> : <ProfileWrapper />} />
         </Routes>
       </Router>

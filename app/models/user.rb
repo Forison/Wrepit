@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_one :otp, dependent: :destroy
+  has_many :otp, dependent: :destroy
   has_secure_password
   has_one_attached :image
 

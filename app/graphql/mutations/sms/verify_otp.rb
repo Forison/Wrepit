@@ -1,16 +1,16 @@
 module Mutations
   module Sms
     class VerifyOtp < BaseMutation
-      argument :otp_code, String, required: true
+      argument :code, String, required: true
 
       field :success, Boolean, null: false
 
-      def resolve(otp_code:)
-        otp = context[:current_user].otp.where(code: otp_code).last
+      def resolve(code:)
+        otp = Otp.where(code:, user_id: context[:current_user].id).last
         expires_at = Time.current - 2.days
 
         if otp && !otp.expired?
-          user.update(verified: true)
+          context[:current_user].update(verified: true)
           otp.update(expires_at:)
           { success: true }
         else

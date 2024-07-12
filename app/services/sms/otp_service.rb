@@ -1,7 +1,7 @@
 module Sms
   class OtpService
-    def initialize(phone_number:)
-      @phone_number = phone_number
+    def initialize(phone)
+      @phone = phone
       @client = Twilio::REST::Client.new
     end
 
@@ -9,7 +9,7 @@ module Sms
       otp_code = generate_otp
       @client.messages.create(
         from: ENV['TWILIO_PHONE_NUMBER'],
-        to:   @phone_number,
+        to:   @phone[:phone],
         body: "Your OTP code is #{otp_code}, This token will expire after 3 hours"
       )
       otp_code

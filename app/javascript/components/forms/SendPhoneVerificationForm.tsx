@@ -23,7 +23,7 @@ export default function SendPhoneVerificationForm({
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Stack spacing={1}>
-            <Typography align='center'>Verification code destination</Typography>
+            <Typography align='center'>Verify your Phone Number</Typography>
             <PhoneInput
               country={'us'}
               value={phone}

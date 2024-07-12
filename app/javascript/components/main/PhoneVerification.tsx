@@ -47,7 +47,7 @@ export default function PhoneVerification(): JSX.Element {
         setTimeout(() => {
           setView('')
           setOpen(false)
-        }, 2000)
+        }, 5000)
       }
     },
     onError: () => {
@@ -63,7 +63,7 @@ export default function PhoneVerification(): JSX.Element {
         setMessage('A code has been sent to your number, use the code to verify your phone number')
         setTimeout(() => {
           setView('verifyPhone')
-        }, 2000)
+        }, 5000)
       }
     },
     onError: () => {
@@ -83,33 +83,31 @@ export default function PhoneVerification(): JSX.Element {
   if (loading) return <Loading />
 
   return (
-    <>
-      {message && <Banner severity={severity} message={message} />}
-      <br />
-      <Modal
-        open={data.currentUser.verified ? false : true}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          {view === 'sendOtp' ?
-            <Formik
-              onSubmit={requestOtp}
-              initialValues={initialValues}
-            >
-              <SendPhoneVerificationForm phone={data.currentUser.phone} />
-            </Formik >
-            :
-            <Formik
-              onSubmit={verifyOtp}
-              validationSchema={PhoneNumberVerificationSchema}
-              initialValues={initialValues}
-            >
-              <VerifyPhoneNumberForm />
-            </Formik >
-          }
-        </Box>
-      </Modal>
-    </>
+    <Modal
+      open={data.currentUser.verified ? false : true}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        {message && <Banner severity={severity} message={message} />}
+        <br />
+        {view === 'sendOtp' ?
+          <Formik
+            onSubmit={requestOtp}
+            initialValues={initialValues}
+          >
+            <SendPhoneVerificationForm phone={data.currentUser.phone} />
+          </Formik >
+          :
+          <Formik
+            onSubmit={verifyOtp}
+            validationSchema={PhoneNumberVerificationSchema}
+            initialValues={initialValues}
+          >
+            <VerifyPhoneNumberForm />
+          </Formik >
+        }
+      </Box>
+    </Modal>
   )
 }

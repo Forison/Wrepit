@@ -8,7 +8,7 @@ import PrivacyAndSecirity from './PrivacyAndSecurity'
 import TermsAndCondition from './TermsAndConditions'
 import Loading from '../shared/Loading'
 import { CURRENT_USER } from '../api/queries'
-import { isProfilePage, routeMiddleware } from '../utils/pathUtil'
+import { isProfilePage } from '../utils/pathUtil'
 import PhoneVerification from '../main/PhoneVerification'
 
 interface TabPanelProps {
@@ -42,17 +42,16 @@ export default function ProfileWrapper(): JSX.Element {
   const { data, loading } = useQuery(CURRENT_USER, {
     pollInterval: isProfilePage() ? 500 : 0
   })
-  routeMiddleware(!!data.currentUser)
+
   const handleChange = (event: SyntheticEvent, newValue: number) => setValue(newValue)
 
   if (loading) return <Loading />
-  // TODO: NEED A better 
 
   return (
     <>
       <Box sx={{ marginTop: '100px' }}>
         <Grid container spacing={2}>
-          <Header />
+          <Header showAccountMenu={!!data.currentUser} />
           <Grid
             item xs={12}
             sm={3}
@@ -89,7 +88,7 @@ export default function ProfileWrapper(): JSX.Element {
           </Grid>
         </Grid>
       </Box >
-      <PhoneVerification />
+      {!!data.currentUser && <PhoneVerification />}
     </>
   )
 }

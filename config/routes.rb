@@ -11,4 +11,9 @@ Rails.application.routes.draw do
   # For Omniauth authentication 
   get "/auth/:provider/callback", to: "sessions#create" 
   get "/auth/failure", to: redirect('/log_in')
+  
+  # mailer preview 
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end

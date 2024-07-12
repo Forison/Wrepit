@@ -45,6 +45,8 @@ export default function ImageUploadModal(): JSX.Element {
         setMessage('Image upload successful')
         setTimeout(() => {
           handleClose()
+          setSeverity('')
+          setMessage('')
         }, 2000);
       }
     },

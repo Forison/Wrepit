@@ -50,7 +50,11 @@ export default function AccountMenu(): JSX.Element {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <ImageOrInitial name={data.currentUser.firstName} imageUrl={data.currentUser.imageUrl} sx={{ bgcolor: '#5bbff1' }} />
+            <ImageOrInitial
+              name={data.currentUser.firstName}
+              imageUrl={data.currentUser.imageUrl}
+              sx={{ bgcolor: '#5bbff1' }}
+            />
           </IconButton>
         </Tooltip>
       </Box>
